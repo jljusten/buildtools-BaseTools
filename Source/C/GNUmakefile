@@ -55,6 +55,7 @@ APPLICATIONS = \
   GenSec \
   GenCrc32 \
   GenVtf \
+  Installer \
   LzmaCompress \
   Split \
   TianoCompress \

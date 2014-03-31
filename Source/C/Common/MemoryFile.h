@@ -119,4 +119,30 @@ Returns:
 **/
 
 
+/**
+  Returns the size of the data stored in the memory file
+
+  @param MemoryFile  The memory file
+
+  @return  Size of the memory file's contents
+**/
+UINTN
+GetMemoryFileSize (
+  IN EFI_HANDLE InputMemoryFile
+  );
+
+
+/**
+  Returns a pointer to the data stored in the memory file
+
+  @param MemoryFile  The memory file
+
+  @return  Pointer to the data stored in the memory file
+**/
+VOID*
+GetMemoryFileContents (
+  IN EFI_HANDLE InputMemoryFile
+  );
+
+
 #endif

@@ -227,13 +227,60 @@ Returns:
   //
   // Increment the current file pointer (include the 0x0A)
   //
-  InputFile->CurrentFilePointer += CharsToCopy + 1;
+  InputFile->CurrentFilePointer += CharsToCopy;
+  if (EndOfLine != 0) {
+    InputFile->CurrentFilePointer += 1;
+  }
   CheckMemoryFileState (InputMemoryFile);
 
   //
   // Return the string
   //
   return OutputString;
+}
+
+
+/**
+  Returns the size of the data stored in the memory file
+
+  @param MemoryFile  The memory file
+
+  @return  Size of the memory file's contents
+**/
+UINTN
+GetMemoryFileSize (
+  IN EFI_HANDLE InputMemoryFile
+  )
+{
+  MEMORY_FILE *MemoryFile;
+
+  CheckMemoryFileState (InputMemoryFile);
+
+  MemoryFile = (MEMORY_FILE*)InputMemoryFile;
+
+  return (UINTN) (MemoryFile->Eof - MemoryFile->FileImage);
+}
+
+
+/**
+  Returns a pointer to the data stored in the memory file
+
+  @param MemoryFile  The memory file
+
+  @return  Pointer to the data stored in the memory file
+**/
+VOID*
+GetMemoryFileContents (
+  IN EFI_HANDLE InputMemoryFile
+  )
+{
+  MEMORY_FILE *MemoryFile;
+
+  CheckMemoryFileState (InputMemoryFile);
+
+  MemoryFile = (MEMORY_FILE*)InputMemoryFile;
+
+  return (VOID*) MemoryFile->FileImage;
 }
 
 

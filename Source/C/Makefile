@@ -27,6 +27,7 @@ APPLICATIONS = \
   GenPage \
   GenSec \
   GenVtf \
+  Installer \
   LzmaCompress \
   Split \
   TianoCompress \
