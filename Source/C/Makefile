@@ -16,6 +16,7 @@ ARCH = IA32
 
 LIBRARIES = Common
 APPLICATIONS = \
+  BaseToolsBins \
   BootSectImage \
   EfiLdrImage \
   EfiRom \
