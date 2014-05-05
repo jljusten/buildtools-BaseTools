@@ -35,13 +35,19 @@ APPLICATIONS = \
 
 all: libs apps install
 
+!IFDEF RELEASE
+BUILD_TYPE = RELEASE
+!ELSE
+BUILD_TYPE =
+!ENDIF
+
 libs: $(LIBRARIES)
 	@echo.
 	@echo ######################
 	@echo # Build libraries
 	@echo ######################
 	@if not exist $(LIB_PATH) mkdir $(LIB_PATH)
-	@Makefiles\NmakeSubdirs.bat all $**
+	@Makefiles\NmakeSubdirs.bat all $(BUILD_TYPE) $**
 
 apps: $(APPLICATIONS)
 	@echo.
@@ -49,7 +55,7 @@ apps: $(APPLICATIONS)
 	@echo # Build executables
 	@echo ######################
 	@if not exist $(BIN_PATH) mkdir $(BIN_PATH)
-	@Makefiles\NmakeSubdirs.bat all $**
+	@Makefiles\NmakeSubdirs.bat all $(BUILD_TYPE) $**
 
 install: $(LIB_PATH) $(BIN_PATH)
 	@echo.

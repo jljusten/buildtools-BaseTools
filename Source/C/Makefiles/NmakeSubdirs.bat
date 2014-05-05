@@ -15,12 +15,19 @@ setlocal
 SET NMAKE_COMMAND=%1
 SHIFT
 
+if x%1 == xRELEASE (
+  SET BUILD_TYPE=RELEASE=
+  SHIFT
+) else (
+  SET BUILD_TYPE=
+)
+
 :loop
 if "%1"=="" goto success
 
 ECHO Building %1
 pushd %1
-nmake %NMAKE_COMMAND%
+nmake %BUILD_TYPE% %NMAKE_COMMAND%
 if ERRORLEVEL 1 goto error
 ECHO %1 built successfully (%NMAKE_COMMAND%)
 ECHO.

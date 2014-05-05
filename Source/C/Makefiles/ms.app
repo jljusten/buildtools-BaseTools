@@ -16,7 +16,12 @@ APPLICATION = $(BIN_PATH)\$(APPNAME).exe
 all: $(APPLICATION) 
 
 LD_FLAGS = /incremental:no /nodefaultlib:libc.lib
+
+!IFDEF RELEASE
+LD_FLAGS = /release /opt:ref,icf /merge:.rdata=.text $(LD_FLAGS)
+!ELSE
 LD_FLAGS = /debug $(LD_FLAGS)
+!ENDIF
 
 $(APPLICATION) : $(OBJECTS) 
 	-@if not exist $(BIN_PATH) mkdir $(BIN_PATH)

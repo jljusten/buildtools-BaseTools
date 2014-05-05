@@ -15,14 +15,20 @@ SUBDIRS = Source\C Source\Python
 
 all: c python
 
+!IFDEF RELEASE
+BUILD_TYPE = RELEASE
+!ELSE
+BUILD_TYPE =
+!ENDIF
+
 c :
-	@Source\C\Makefiles\NmakeSubdirs.bat all Source\C
+	@Source\C\Makefiles\NmakeSubdirs.bat all $(BUILD_TYPE) Source\C
 
 python:
-	@Source\C\Makefiles\NmakeSubdirs.bat all Source\Python
+	@Source\C\Makefiles\NmakeSubdirs.bat all $(BUILD_TYPE) Source\Python
 
 subdirs: $(SUBDIRS)
-	@Source\C\Makefiles\NmakeSubdirs.bat all $**
+	@Source\C\Makefiles\NmakeSubdirs.bat all $(BUILD_TYPE) $**
 
 .PHONY: clean
 clean:
