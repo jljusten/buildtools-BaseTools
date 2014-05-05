@@ -201,7 +201,7 @@ Returns:
     CharsToCopy = EndOfLine - InputFile->CurrentFilePointer;
   }
 
-  OutputString = malloc (CharsToCopy);
+  OutputString = malloc (CharsToCopy + 1);
   if (OutputString == NULL) {
     return NULL;
   }
@@ -227,7 +227,10 @@ Returns:
   //
   // Increment the current file pointer (include the 0x0A)
   //
-  InputFile->CurrentFilePointer += CharsToCopy + 1;
+  InputFile->CurrentFilePointer += CharsToCopy;
+  if (EndOfLine != 0) {
+    InputFile->CurrentFilePointer += 1;
+  }
   CheckMemoryFileState (InputMemoryFile);
 
   //
