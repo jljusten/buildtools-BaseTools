@@ -262,6 +262,28 @@ GetMemoryFileSize (
 }
 
 
+/**
+  Returns a pointer to the data stored in the memory file
+
+  @param MemoryFile  The memory file
+
+  @return  Pointer to the data stored in the memory file
+**/
+VOID*
+GetMemoryFileContents (
+  IN EFI_HANDLE InputMemoryFile
+  )
+{
+  MEMORY_FILE *MemoryFile;
+
+  CheckMemoryFileState (InputMemoryFile);
+
+  MemoryFile = (MEMORY_FILE*)InputMemoryFile;
+
+  return (VOID*) MemoryFile->FileImage;
+}
+
+
 STATIC
 VOID
 CheckMemoryFileState (
