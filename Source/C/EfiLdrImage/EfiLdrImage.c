@@ -89,11 +89,11 @@ Returns:
 
 VOID
 Usage (
-  VOID
+  int return_code
   )
 {
   printf ("Usage: EfiLdrImage -o OutImage LoaderImage PeImage1 PeImage2 ... PeImageN\n");
-  exit (1);
+  exit (return_code);
 }
 
 EFI_STATUS
@@ -188,16 +188,14 @@ Returns:
   SetUtilityName (UTILITY_NAME);
 
   if (argc == 1) {
-    Usage();
-    return STATUS_ERROR;
+    Usage(STATUS_ERROR);
   }
   
   argc --;
   argv ++;
 
   if ((stricmp (argv[0], "-h") == 0) || (stricmp (argv[0], "--help") == 0)) {
-    Usage();
-    return STATUS_SUCCESS;    
+    Usage(STATUS_SUCCESS);
   }
 
   if (stricmp (argv[0], "--version") == 0) {
