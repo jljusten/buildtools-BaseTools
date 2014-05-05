@@ -240,6 +240,28 @@ Returns:
 }
 
 
+/**
+  Returns the size of the data stored in the memory file
+
+  @param MemoryFile  The memory file
+
+  @return  Size of the memory file's contents
+**/
+UINTN
+GetMemoryFileSize (
+  IN EFI_HANDLE InputMemoryFile
+  )
+{
+  MEMORY_FILE *MemoryFile;
+
+  CheckMemoryFileState (InputMemoryFile);
+
+  MemoryFile = (MEMORY_FILE*)InputMemoryFile;
+
+  return (UINTN) (MemoryFile->Eof - MemoryFile->FileImage);
+}
+
+
 STATIC
 VOID
 CheckMemoryFileState (
